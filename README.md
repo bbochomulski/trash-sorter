@@ -12,8 +12,11 @@ Podzielone są one na klasy:
 * Paper/cardboard: 594 + 403 = 997
 * Plastic: 482
 * Non-recyclable: 137
-# Razem `2527` zdjęć
 
+## Wykres z podziałem.
+![Wykres](images\podzial_zdjec.jpg)
+
+## Razem `2527` zdjęć
 Informacji na temat machine learningu szukamy na stronie API keras oraz biblioteki tensorflow
 
 > https://www.tensorflow.org/tutorials/load_data/images
