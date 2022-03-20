@@ -14,7 +14,7 @@ Podzielone są one na klasy:
 * Non-recyclable: 137
 
 ## Wykres z podziałem.
-![Wykres](images/podzial_zdjec.jpg)
+![Wykres klas](images/classes.jpg)
 
 ## Razem `2527` zdjęć
 Informacji na temat machine learningu szukamy na stronie API keras oraz biblioteki tensorflow
