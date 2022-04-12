@@ -45,13 +45,18 @@ def test_model(model, n_images):
     return passed / n_images * 100
 
 
-def input_photo(model):
-    for img_pred in os.listdir('test'):
-        path = f'test/{img_pred}'
-        img_pred = image.load_img(path)
+def input_photo(model, img=None):
+    images_list = os.listdir('test') if img is None else [img]
+    for img_pred in images_list:
+        if img is None:
+            path = os.path.join('test', img_pred)
+            img_pred = image.load_img(path)
         img_pred = resizeimage.resize_contain(img_pred, [224, 224])
         img_pred = img_pred.convert("RGB")
         img_pred = image.img_to_array(img_pred)
         img_pred = np.expand_dims(img_pred, axis=0)
         output = model.predict(img_pred)
-        print("{} is a {}".format(path, verdict(output)))
+        if len(images_list) == 1:
+            return verdict(output)
+        else:
+            print("{} is a {}".format(path, verdict(output)))

@@ -1,9 +1,15 @@
 import wx
+import os
 import wx.lib.statbmp as SB
 from pubsub import pub
 from PIL import Image
+from resizeimage import resizeimage
 
-PhotoWeight = 512
+from testing import input_photo
+from keras.models import load_model
+
+
+PhotoWidth = 512
 PhotoHeight = 384
 
 
@@ -11,6 +17,8 @@ class Frame(wx.Frame):
     def __init__(self, parent, title):
         super(Frame, self).__init__(parent, title=title)
         self.panel = wx.Panel(self)
+        self.model = load_model(os.path.join('models', 'hindus_1204', 'hindus_1204_pass3'))
+        self.dragged_image = None
         st = wx.StaticText(self.panel, label="Sprawdź do jakiego pojemnika możesz\nwrzucić odpad",
                            style=wx.ALIGN_CENTER)
 
@@ -26,10 +34,11 @@ class Frame(wx.Frame):
         self.panel.SetSizer(self.sizer)
 
         button = wx.Button(self.panel, wx.ID_ANY, 'Sprawdź gdzie wyrzucić', (170, 550))
+        self.Bind(wx.EVT_BUTTON, self.onButton, button)
 
         button.SetBackgroundColour((255, 255, 255, 1))
         button.SetWindowStyleFlag(wx.SIMPLE_BORDER)
-        button.Bind(wx.EVT_BUTTON, onButton)
+        button.Bind(wx.EVT_BUTTON, self.onButton)
 
         bitmap = wx.Bitmap("images/recycling.jpg")
         img = bitmap.ConvertToImage()
@@ -40,7 +49,7 @@ class Frame(wx.Frame):
         image_drop = DropImage(self)
 
         self.image_ctrl.SetDropTarget(image_drop)
-        self.sizer.Add(self.image_ctrl, 0, wx.ALL, 5)
+        self.sizer.Add(self.image_ctrl, wx.SizerFlags().Center())
         self.panel.SetSizer(self.sizer)
         self.sizer.Add(button, wx.SizerFlags().Border(wx.LEFT, 200))
         self.panel.Refresh()
@@ -53,14 +62,22 @@ class Frame(wx.Frame):
         self.on_view(filepath=filepath)
 
     def on_view(self, filepath):
-        img = wx.Image(filepath, wx.BITMAP_TYPE_ANY)
+        img = Image.open(filepath)
+        self.dragged_image = img
+        img = resizeimage.resize_contain(img, [PhotoWidth, PhotoHeight])
+        wx_img = wx.Image(img.size[0], img.size[1])
+        wx_img.SetData(img.convert('RGB').tobytes())
+        bmp = wx.Bitmap(wx_img)
+        self.image_ctrl.SetBitmap(bmp)
+        self.image_ctrl.Refresh()
 
-        w = img.GetWidth()
-        h = img.GetHeight()
+    def onButton(self, event):
+        verdict = input_photo(self.model, self.dragged_image)
 
-        img = img.Scale(w, h)
-        self.image_ctrl.SetBitmap(wx.Bitmap(img))
-        self.panel.Refresh()
+        # stworz msgbox z wynikiem
+        msg = wx.MessageDialog(None, verdict, 'Wynik', wx.OK | wx.ICON_INFORMATION)
+        msg.ShowModal()
+        msg.Destroy()
 
 
 class DropImage(wx.FileDropTarget):
@@ -71,9 +88,9 @@ class DropImage(wx.FileDropTarget):
 
     def OnDropFiles(self, x, y, filenames):
         image = Image.open(filenames[0])
-        image.thumbnail((PhotoWeight, PhotoHeight))
-        image.save('images/img_to_check.png')
-        pub.sendMessage('imgDragged', filepath='images/img_to_check.png')
+        image.thumbnail((PhotoWidth, PhotoHeight))
+        image.save('test/img_to_check.png')
+        pub.sendMessage('imgDragged', filepath='test/img_to_check.png')
         return True
 
 
@@ -87,10 +104,6 @@ class MyApp(wx.App):
         self.frame.Show()
 
         return True
-
-
-def onButton(event):
-    print("klik")
 
 
 app = MyApp()
