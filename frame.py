@@ -72,10 +72,13 @@ class Frame(wx.Frame):
         self.image_ctrl.Refresh()
 
     def onButton(self, event):
-        verdict = input_photo(self.model, self.dragged_image)
+        if self.dragged_image is not None:
+            verdict = input_photo(self.model, self.dragged_image)
+            msg = wx.MessageDialog(None, verdict, 'Wynik', wx.OK | wx.ICON_INFORMATION)
+        else:
+            verdict = 'Nie wybrałeś obrazka'
+            msg = wx.MessageDialog(None, verdict, 'Wynik', wx.ICON_ERROR | wx.ICON_INFORMATION)
 
-        # stworz msgbox z wynikiem
-        msg = wx.MessageDialog(None, verdict, 'Wynik', wx.OK | wx.ICON_INFORMATION)
         msg.ShowModal()
         msg.Destroy()
 
