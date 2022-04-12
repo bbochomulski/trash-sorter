@@ -73,7 +73,7 @@ class Frame(wx.Frame):
 
     def onButton(self, event):
         if self.dragged_image is not None:
-            verdict = input_photo(self.model, self.dragged_image)
+            verdict = 'Na obrazku znajduje sie {}'.format(input_photo(self.model, self.dragged_image))
             msg = wx.MessageDialog(None, verdict, 'Wynik', wx.OK | wx.ICON_INFORMATION)
         else:
             verdict = 'Nie wybrałeś obrazka'
@@ -109,5 +109,6 @@ class MyApp(wx.App):
         return True
 
 
-app = MyApp()
-app.MainLoop()
+if __name__ == '__main__':
+    app = MyApp()
+    app.MainLoop()

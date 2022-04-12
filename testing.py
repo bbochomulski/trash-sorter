@@ -57,6 +57,16 @@ def input_photo(model, img=None):
         img_pred = np.expand_dims(img_pred, axis=0)
         output = model.predict(img_pred)
         if len(images_list) == 1:
-            return verdict(output)
+            result = verdict(output)
+            if result == 'cardboard':
+                return 'karton'
+            elif result == 'glass':
+                return 'szklo'
+            elif result == 'metal':
+                return 'metal'
+            elif result == 'paper':
+                return 'papier'
+            elif result == 'plastic':
+                return 'plastik'
         else:
             print("{} is a {}".format(path, verdict(output)))
