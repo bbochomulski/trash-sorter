@@ -7,7 +7,7 @@ import os
 
 
 models_dir = 'models'
-model_name = 'hindus_newdataset'
+model_name = 'hindus_1204'
 model_dir = None
 version = None
 
@@ -17,6 +17,10 @@ if not os.path.exists(models_dir):
 if not version:
     if os.path.exists(os.path.join(models_dir, model_name)):
         versions = [version for version in os.listdir(os.path.join(models_dir, model_name))]
+    else:
+        versions = []
+
+    if len(versions) > 0:
         versions.sort()
         last_version = versions[-1].split('_')[2].replace('pass', '')
         model_dir = os.path.join(models_dir, model_name)
@@ -36,7 +40,7 @@ input_shape = (224, 224, 3)
 data_dir = 'data-resized'
 nb_train_samples = 2000
 nb_validation_samples = 400
-epochs = 5
+epochs = 30
 batch_size = 100
 testing = False
 
