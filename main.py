@@ -8,56 +8,46 @@ import os
 
 models_dir = 'models'
 model_name = 'hindus_1204'
-model_dir = None
+model_path = None
 version = None
+
 
 if not os.path.exists(models_dir):
     os.makedirs(models_dir)
 
-if not version:
-    if os.path.exists(os.path.join(models_dir, model_name)):
-        versions = [version for version in os.listdir(os.path.join(models_dir, model_name))]
-    else:
-        versions = []
-
+if model_name in os.listdir(models_dir):
+    model_dir = os.path.join(models_dir, model_name)
+    versions = [version for version in os.listdir(model_dir)]
     if len(versions) > 0:
         versions.sort()
-        last_version = versions[-1].split('_')[2].replace('pass', '')
-        model_dir = os.path.join(models_dir, model_name)
-        model_name = model_name + '_pass' + str(int(last_version))
+        model_path = os.path.join(model_dir, max(versions))
+        version = max(versions).replace(f'{model_name}_pass', '')
     else:
-        os.mkdir(os.path.join(models_dir, model_name))
-        model_dir = os.path.join(models_dir, model_name)
-        model_name = model_name + '_pass0'
+        version = 0
 else:
-    model_dir = os.path.join(models_dir, model_name)
-    model_name = model_name + '_pass' + str(version)
-
-
+    os.makedirs(os.path.join(models_dir, model_name))
+    version = 0
 
 input_shape = (224, 224, 3)
 
 data_dir = 'data-resized'
 nb_train_samples = 2000
 nb_validation_samples = 400
-epochs = 30
+epochs = 50
 batch_size = 100
 testing = False
 
 
 def save_model_to_file(model):
-    if not os.path.exists(model_dir):
-        os.mkdir(os.path.join(models_dir, model_name))
-    name, ver, passed = model_name.split('_')
-    filename = name + '_' + ver + '_pass' + str(int(passed.replace('pass', '')) + 1)
+    filename = model_name + '_pass' + str(int(version) + 1)
     print("Model saved as {}".format(filename))
-    model.save(os.path.join(model_dir, filename))
+    model.save(os.path.join(models_dir, model_name, filename))
     return filename
 
 
 def load_model_from_file():
-    print("Loaded model: {}".format(model_name))
-    return load_model(os.path.join(models_dir, model_name.split('_')[0] + '_' + model_name.split('_')[1], model_name))
+    print("Loaded model: {} pass {}".format(model_name, version))
+    return load_model(model_path)
 
 
 def generate_logfile():
@@ -77,12 +67,10 @@ def generate_logfile():
 
 
 if not testing:
-    print(model_dir)
-    if os.path.exists(model_dir):
+    if version:
         model = load_model_from_file()
     else:
         model = create_model(model_name, input_shape)
-
 
     training_generator, validation_generator = create_generators(data_dir, input_shape, batch_size)
 
