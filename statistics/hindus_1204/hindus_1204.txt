@@ -1,0 +1,42 @@
+hindus_1204_pass1
+              precision    recall  f1-score   support
+
+   Cardboard       0.49      0.88      0.63       403
+       Glass       0.51      0.34      0.40       669
+       Metal       0.57      0.22      0.32       799
+       Paper       0.36      0.43      0.40       594
+     Plastic       0.40      0.63      0.49       482
+
+    accuracy                           0.45      2947
+   macro avg       0.47      0.50      0.45      2947
+weighted avg       0.47      0.45      0.42      2947
+
+
+hindus_1204_pass2
+              precision    recall  f1-score   support
+
+   Cardboard       0.89      0.87      0.88       403
+       Glass       0.88      0.60      0.71       669
+       Metal       0.80      0.81      0.81       799
+       Paper       0.72      0.91      0.80       594
+     Plastic       0.70      0.79      0.74       482
+
+    accuracy                           0.79      2947
+   macro avg       0.80      0.79      0.79      2947
+weighted avg       0.80      0.79      0.78      2947
+
+
+hindus_1204_pass3
+              precision    recall  f1-score   support
+
+   Cardboard       0.90      0.99      0.94       403
+       Glass       0.91      0.86      0.88       669
+       Metal       0.86      0.97      0.91       799
+       Paper       0.94      0.92      0.93       594
+     Plastic       0.97      0.77      0.86       482
+
+    accuracy                           0.91      2947
+   macro avg       0.91      0.90      0.90      2947
+weighted avg       0.91      0.91      0.90      2947
+
+
