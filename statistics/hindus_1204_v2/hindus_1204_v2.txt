@@ -1,0 +1,14 @@
+hindus_1204_v2_pass1
+              precision    recall  f1-score   support
+
+   Cardboard       0.93      0.98      0.96       403
+       Glass       0.84      0.91      0.88       669
+       Metal       0.94      0.84      0.89       799
+       Paper       0.89      0.98      0.93       594
+     Plastic       0.95      0.85      0.90       482
+
+    accuracy                           0.91      2947
+   macro avg       0.91      0.91      0.91      2947
+weighted avg       0.91      0.91      0.91      2947
+
+

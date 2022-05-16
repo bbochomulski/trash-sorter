@@ -17,7 +17,7 @@ class Frame(wx.Frame):
     def __init__(self, parent, title):
         super(Frame, self).__init__(parent, title=title)
         self.panel = wx.Panel(self)
-        self.model = load_model(os.path.join('models', 'hindus_1204', 'hindus_1204_pass3'))
+        self.model = load_model(os.path.join('models', 'hindus_v7', 'hindus_v7_pass6'))
         self.dragged_image = None
         st = wx.StaticText(self.panel, label="Sprawdź do jakiego pojemnika możesz\nwrzucić odpad",
                            style=wx.ALIGN_CENTER)

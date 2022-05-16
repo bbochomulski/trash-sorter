@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-if __name__ == "__main__":
-    model = load_model(os.path.join("models", "hindus_v7", "hindus_v7_pass6"))
+def create_statistics(model_path):
+    model = load_model(model_path)
     test_generator = ImageDataGenerator()
     test_data_generator = test_generator.flow_from_directory(
         os.path.join('data-resized'),
@@ -26,7 +26,10 @@ if __name__ == "__main__":
 
     report = metrics.classification_report(true_classes, predicted_classes, target_names=class_labels)
     print('Classification Report')
-    print(report)
+    file_name = 'summary_{}.txt'.format(model_path.split("\\")[-2])
+    if 'pass1' in model_path:
+        with open(os.path.join("statistics", model_path.split("\\")[-2], file_name), 'w') as f:
+            model.summary(print_fn=lambda x: f.write(x + '\n'))
 
     print('Confusion Matrix')
     cm = metrics.confusion_matrix(test_data_generator.classes, predicted_classes)
@@ -36,8 +39,21 @@ if __name__ == "__main__":
                          columns=['Cardboard', 'Glass', 'Metal', 'Paper', 'Plastic'])
 
     plt.figure(figsize=(5, 4))
-    plt.title('Confusion Matrix')
-    sns.heatmap(cm_df, annot=True)
+    plt.title(model_path.split("\\")[-1])
+    sns.heatmap(cm_df, annot=True, fmt='g')
     plt.ylabel('Actal Values')
     plt.xlabel('Predicted Values')
     plt.show()
+    file_name = 'confusion_matrix_{}.png'.format(model_path.split("\\")[-1])
+    plt.savefig(os.path.join("statistics", model_path.split("\\")[-2], file_name))
+
+    return report
+
+
+if __name__ == "__main__":
+    model_name = "hindus_newdataset"
+    path = os.path.join("models", model_name)
+    os.makedirs(os.path.join("statistics", model_name), exist_ok=True)
+    with open(os.path.join("statistics", model_name, f"{model_name}.txt"), 'a+') as f:
+        for model in os.listdir(path):
+            f.write(model + '\n' + create_statistics(os.path.join(path, model)) + '\n\n')
