@@ -30,6 +30,8 @@ Podzielone są one na klasy:
 * Plastic: 482
 * Cardboard: 403
 
+#### Razem `2972` zdjęcia
+
 ![wykres_danych_ost_slupki](images/classes2.jpg)
 ![wykres_danych_ost_kolowy](images/classes2_circle.jpg)
 
