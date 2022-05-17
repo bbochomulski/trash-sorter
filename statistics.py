@@ -43,7 +43,6 @@ def create_statistics(model_path):
     sns.heatmap(cm_df, annot=True, fmt='g')
     plt.ylabel('Actal Values')
     plt.xlabel('Predicted Values')
-    plt.show()
     file_name = 'confusion_matrix_{}.png'.format(model_path.split("\\")[-1])
     plt.savefig(os.path.join("statistics", model_path.split("\\")[-2], file_name))
 
@@ -51,9 +50,10 @@ def create_statistics(model_path):
 
 
 if __name__ == "__main__":
-    model_name = "hindus_newdataset"
-    path = os.path.join("models", model_name)
-    os.makedirs(os.path.join("statistics", model_name), exist_ok=True)
-    with open(os.path.join("statistics", model_name, f"{model_name}.txt"), 'a+') as f:
-        for model in os.listdir(path):
-            f.write(model + '\n' + create_statistics(os.path.join(path, model)) + '\n\n')
+    models = ["hindus_1204", "hindus_1204_v2", "hindus_newdataset", "hindus_v5", "hindus_v6", "hindus_v7"]
+    for model_name in models:
+        path = os.path.join("models", model_name)
+        os.makedirs(os.path.join("statistics", model_name), exist_ok=True)
+        with open(os.path.join("statistics", model_name, f"{model_name}.txt"), 'a+') as f:
+            for model in os.listdir(path):
+                f.write(model + '\n' + create_statistics(os.path.join(path, model)) + '\n\n')
