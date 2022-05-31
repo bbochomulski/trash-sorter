@@ -51,8 +51,10 @@ Znajduje się ona w repozytorium github pod linkiem:
 >https://github.com/bbochomulski/trash-sorter/blob/model_testing/frame.py
 
 ## Szczegóły
->Aby wykonać zadanie wybraliśmy sieć konwolucyjną, jako że była ona polecana do zadań związanych z rozpoznawaniem obrazu.
->Model nasz przyjmuje 
+>Aby wykonać zadanie wybraliśmy sieć konwolucyjną, jako że była ona polecana do zadań związanych z rozpoznawaniem obrazu.<br/>
+>Model nasz przyjmuje obrazy o parametrach `224x224` piksele.
+>Początkowo pracowaliśmy na obrazach w większej rozdzielczości lecz znacząco spowalniało to proces uczenia modelu<br/>
+>Wykorzystujemy także augmentację w celu zwiększenia liczby danych, na których jesteśmy w stanie trenować model
 
 ## Przebieg
 
