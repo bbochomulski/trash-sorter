@@ -50,6 +50,10 @@ Stworzyliśmy także minimalistyczną aplikację umożliwiającą ładowanie zdj
 Znajduje się ona w repozytorium github pod linkiem:
 >https://github.com/bbochomulski/trash-sorter/blob/model_testing/frame.py
 
+## Szczegóły
+>Aby wykonać zadanie wybraliśmy sieć konwolucyjną, jako że była ona polecana do zadań związanych z rozpoznawaniem obrazu.
+>Model nasz przyjmuje 
+
 ## Przebieg
 
 >Stworzyliśmy model sieci neuronowej, który był dopracowywany w 6 kolejnych wersjach:
