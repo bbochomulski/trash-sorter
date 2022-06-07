@@ -35,7 +35,7 @@ Podzielone są one na klasy:
 ![wykres_danych_ost_slupki](images/classes2.jpg)
 ![wykres_danych_ost_kolowy](images/classes2_circle.jpg)
 
-> Zauważalnie zmieniły się ilości konkretnych danych, usunięta została klasa non-recyclable oraz wydzielone 2 oddzielne klasy cardboard, paper. Zdecydowaliśmy się na taki podział, ponieważ w ten sposób nie ma klas, które w znaczny sposób odstają ilościowo od reszty (wcześniej działo się tak w przypadku choćby non-recyclable)
+Zauważalnie zmieniły się ilości konkretnych danych, usunięta została klasa non-recyclable oraz wydzielone 2 oddzielne klasy cardboard, paper. Zdecydowaliśmy się na taki podział, ponieważ w ten sposób nie ma klas, które w znaczny sposób odstają ilościowo od reszty (wcześniej działo się tak w przypadku choćby non-recyclable)
 
 __Informacji na temat machine learningu szukaliśmy na stronie API keras oraz biblioteki tensorflow__
 > https://www.tensorflow.org/tutorials/load_data/images
@@ -51,22 +51,22 @@ Znajduje się ona w repozytorium github pod linkiem:
 >https://github.com/bbochomulski/trash-sorter/blob/model_testing/frame.py
 
 ## Szczegóły
->Aby wykonać zadanie wybraliśmy sieć konwolucyjną, jako że była ona polecana do zadań związanych z rozpoznawaniem obrazu.<br/>
->Model nasz przyjmuje obrazy o parametrach `224x224` piksele.
->Początkowo pracowaliśmy na obrazach w większej rozdzielczości lecz znacząco spowalniało to proces uczenia modelu<br/>
->Wykorzystujemy także augmentację w celu zwiększenia liczby danych, na których jesteśmy w stanie trenować model
+Aby wykonać zadanie wybraliśmy sieć konwolucyjną, jako że była ona polecana do zadań związanych z rozpoznawaniem obrazu.<br/>
+Model nasz przyjmuje obrazy o parametrach `224x224` piksele.
+Początkowo pracowaliśmy na obrazach w większej rozdzielczości lecz znacząco spowalniało to proces uczenia modelu<br/>
+Wykorzystujemy także augmentację w celu zwiększenia liczby danych, na których jesteśmy w stanie trenować model
 
 ## Przebieg
 
->Stworzyliśmy model sieci neuronowej, który był dopracowywany w 6 kolejnych wersjach:
->>hindus_v4 <br/>
-hindus_v5 <br/>
-hindus_v6 <br/>
-hindus_v7 <br/>
-hindus_newdataset <br/>
-hindus_1204 <br/>
->
-> ostateczną wersją modelu jest hindus_1204, osiągający skuteczność na poziomie około 94%
+Stworzyliśmy model sieci neuronowej, który był dopracowywany w 6 kolejnych wersjach:
+*hindus_v4 <br/>
+*hindus_v5 <br/>
+*hindus_v6 <br/>
+*hindus_v7 <br/>
+*hindus_newdataset <br/>
+*hindus_1204 <br/>
+
+ostateczną wersją modelu jest hindus_1204, osiągający skuteczność na poziomie około 94%
 
 ### Zestawienie parametrów kolejnych modeli:
 ![Wykres_hindusy_val_acc](images/wykres_accuracy_w_uczeniu.png)
@@ -82,6 +82,6 @@ hindus_1204 <br/>
 ![Conf_matrix_hindus_1204](statistics/hindus_1204/confusion_matrix_hindus_1204_pass3.png)
 ![Conf_matrix_hindus_1204_v2](statistics/hindus_1204_v2/confusion_matrix_hindus_1204_v2_pass1.png)
 
-> Po przeanalizowaniu confusion matrix dla każdej wersji modelu, widać, że nasze starania idą w dobrą stronę, ponieważ pierwsza wersja modelu stosunkowo często myliła obrazy.<br/>
-> Wraz z kolejnymi wersjami trend ten zanikał.<br/>
-> Ostateczna wersja modelu dobrze rozpoznaje obrazy, co widać na ostatnim wykresie (idealną styuacją jest, gdy wszystkie obrazy z danej klasy są na głównej przekątnej macierzy)
+Po przeanalizowaniu confusion matrix dla każdej wersji modelu, widać, że nasze starania idą w dobrą stronę, ponieważ pierwsza wersja modelu stosunkowo często myliła obrazy.<br/>
+Wraz z kolejnymi wersjami trend ten zanikał.<br/>
+Ostateczna wersja modelu dobrze rozpoznaje obrazy, co widać na ostatnim wykresie (idealną styuacją jest, gdy wszystkie obrazy z danej klasy są na głównej przekątnej macierzy)
