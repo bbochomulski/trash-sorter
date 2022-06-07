@@ -59,12 +59,12 @@ Wykorzystujemy także augmentację w celu zwiększenia liczby danych, na któryc
 ## Przebieg
 
 Stworzyliśmy model sieci neuronowej, który był dopracowywany w 6 kolejnych wersjach:
-*hindus_v4 <br/>
-*hindus_v5 <br/>
-*hindus_v6 <br/>
-*hindus_v7 <br/>
-*hindus_newdataset <br/>
-*hindus_1204 <br/>
+* hindus_v4 <br/>
+* hindus_v5 <br/>
+* hindus_v6 <br/>
+* hindus_v7 <br/>
+* hindus_newdataset <br/>
+* hindus_1204 <br/>
 
 ostateczną wersją modelu jest hindus_1204, osiągający skuteczność na poziomie około 94%
 
