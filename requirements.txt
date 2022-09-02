@@ -35,7 +35,7 @@ oauthlib==3.2.0
 opt-einsum==3.3.0
 packaging @ file:///tmp/build/80754af9/packaging_1637314298585/work
 pandas @ file:///C:/ci/pandas_1635506714241/work
-Pillow==9.1.0
+Pillow==9.1.1
 protobuf==3.20.1
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
